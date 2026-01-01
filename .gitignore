@@ -1,0 +1,17 @@
+# Visual Studio
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.vscode/
+
+# Packages
+*.nupkg
+packages/
+
+# Logs
+*.log
+
+# Autres fichiers temporaires
+*.tmp
