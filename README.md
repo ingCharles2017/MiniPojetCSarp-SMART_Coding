@@ -33,7 +33,7 @@ GestionReservations
 ├── Program.cs
 │
 ├── Models
-│ ├── Personne.cs
+│ ├── Client.cs
 │ ├── Ressource.cs
 │ ├── Salle.cs
 │ ├── Chambre.cs
