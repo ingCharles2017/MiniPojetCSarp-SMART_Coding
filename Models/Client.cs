@@ -14,5 +14,12 @@ namespace MiniPojetCSarp_SMART_Coding.Models
             Nom = nom;
             Email = email;
         }
+
+        public override string ToString()
+        {
+            return $"{Nom} ({Email})";
+        }
+
     }
 }
+
