@@ -11,7 +11,7 @@ namespace MiniPojetCSarp_SMART_Coding.Models
         public int NombreDeLists { get; set; }
    
 
-        public Chambre(int id, string nom, Client responsable, string contact, int numero, int nombreDeLists) : base(id, nom, responsable, contact)
+        public Chambre(int id, string nom, Responsable responsable, string contact, int numero, int nombreDeLists) : base(id, nom, responsable, contact)
         {
 
                 Numero = numero;
