@@ -25,3 +25,31 @@ public void AjouterRessource(Ressource ressource)
                 Console.WriteLine("Aucune ressource disponible.");
                 return;
             }
+            foreach (Ressource r in ressources)
+            {
+                Console.WriteLine(
+                    "ID : " + r.Id +
+                    " | Nom : " + r.Nom +
+                    " | Type : " + r.GetTypeRessource()
+                );
+            }
+        }
+
+        public Ressource ObtenirParId(int id)
+        {
+            foreach (Ressource r in ressources)
+            {
+                if (r.Id == id)
+                {
+                    return r;
+                }
+            }
+            return null;
+        }
+
+        public List<Ressource> ListerRessources()
+        {
+            return ressources;
+        }
+    }
+}
