@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using GestionReservations.Models;
+using Reservations.Models;
 
 namespace GestionReservations.Services
 {
