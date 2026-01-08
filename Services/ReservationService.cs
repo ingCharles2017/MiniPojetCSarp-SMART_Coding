@@ -1,15 +1,26 @@
-
-using System;   
 using System.Collections.Generic;
-using GestionReservations.Models;
+using System.Linq;
+using Reservations.Models;
 
 namespace GestionReservations.Services
 {
     public class ReservationService
     {
-        private List<Reservation> reservations;
+        private List<Reservation> reservations = new List<Reservation>();
 
-        public ReservationService()
+        public void CreerReservation(Reservation reservation)
         {
-            reservations = new List<Reservation>();
+            reservations.Add(reservation);
         }
+
+        public Reservation ObtenirParId(int id)
+        {
+            return reservations.FirstOrDefault(r => r.Id == id);
+        }
+
+        public List<Reservation> ListerReservations()
+        {
+            return reservations;
+        }
+    }
+}

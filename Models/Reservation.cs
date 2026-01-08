@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace GestionReservations.Models
 {
     public class Reservation
@@ -11,5 +12,15 @@ namespace GestionReservations.Models
         public Client ClientInterne { get; set; }
         public DateTime DateReservation { get; set; }
         public string Statut { get; set; }
+
+        public Reservation(int id, Ressource ressource, Client client, DateTime date)
+        {
+            Id = id;
+            Ressource = ressource;
+            ClientInterne = client;
+            DateReservation = date;
+            Statut = "Confirmée";
+        }
     }
 }
+
