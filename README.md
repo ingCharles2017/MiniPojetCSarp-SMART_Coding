@@ -35,6 +35,7 @@ GestionReservations
 ├── Models
 │ ├── Client.cs
 │ ├── Ressource.cs
+| |── Responsable.cs
 │ ├── Salle.cs
 │ ├── Chambre.cs
 │ ├── Equipement.cs
