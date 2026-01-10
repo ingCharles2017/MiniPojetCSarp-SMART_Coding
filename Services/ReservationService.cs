@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using Reservations.Models;
+using MiniPojetCSarp_SMART_Coding.Models;
+
 
 namespace GestionReservations.Services
 {

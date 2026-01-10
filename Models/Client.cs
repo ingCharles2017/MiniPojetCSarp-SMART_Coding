@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
+
+/// <summary>
+/// Représente un client interne effectuant une réservation.
+/// </summary>
 namespace MiniPojetCSarp_SMART_Coding.Models
 {
     public class Client

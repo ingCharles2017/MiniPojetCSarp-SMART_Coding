@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
+
+/// <summary>
+/// Spécialisation pour les équipements mobiles (projecteurs, kts etc....).
+/// </summary>
 namespace MiniPojetCSarp_SMART_Coding.Models
 {
     public class Equipement:Ressource

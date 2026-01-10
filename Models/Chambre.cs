@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
+
+/// <summary>
+/// Spécialisation pour les chambres de passage.
+/// </summary>
 namespace MiniPojetCSarp_SMART_Coding.Models
 {   
     public class Chambre:Ressource
