@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using MiniPojetCSarp_SMART_Coding.Models;
-using MiniPojetCSarp_SMART_Coding.Models;
+
 
 namespace MiniPojetCSarp_SMART_Coding.Services
 

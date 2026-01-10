@@ -1,7 +1,7 @@
 ﻿using MiniPojetCSarp_SMART_Coding.Models;
 using MiniPojetCSarp_SMART_Coding.Services;
 using System;
-
+using System.Linq;
 
 class Program
 {
@@ -10,7 +10,7 @@ class Program
 
     static void Main(string[] args)
     {
-       
+        // Initialisation des données
         InitialiserDonnees(_resourceService);
 
         bool quitter = false;
@@ -23,10 +23,18 @@ class Program
 
             switch (choix)
             {
-                case "1": ListerRessources(_resourceService); break;
-                case "2": CreerReservationInteractive(_resourceService, _reservationService); break;
-                case "3": ListerReservationsInteractive(_reservationService); break;
-                case "0": quitter = true; break;
+                case "1":
+                    ListerRessources(_resourceService);
+                    break;
+                case "2":
+                    CreerReservationInteractive(_resourceService, _reservationService);
+                    break;
+                case "3":
+                    ListerReservationsInteractive(_reservationService);
+                    break;
+                case "0":
+                    quitter = true;
+                    break;
                 default:
                     Console.WriteLine("Choix invalide.");
                     Pause();
@@ -49,9 +57,11 @@ class Program
 
     static void InitialiserDonnees(RessourceService service)
     {
+        // Création de responsables
         Responsable resp1 = new Responsable(1, "Marie Laurent", "marie.laurent@entreprise.com");
         Responsable resp2 = new Responsable(2, "Paul Martin", "paul.martin@entreprise.com");
 
+        // Ajout des ressources
         service.AjouterRessource(new Salle(1, "Salle de réunion A", resp1, "Poste 402", 20));
         service.AjouterRessource(new Chambre(2, "Chambre visiteurs", resp2, "Réception", 101, 2));
         service.AjouterRessource(new Equipement(3, "Projecteur Epson", resp1, "Dépôt B", "Vidéo"));
@@ -72,32 +82,44 @@ class Program
     {
         Console.Clear();
         Console.WriteLine("========= CRÉATION D'UNE RÉSERVATION =========");
+
         Console.Write("ID de la ressource : ");
         if (!int.TryParse(Console.ReadLine(), out int id)) return;
 
         var res = resSvc.ObtenirParId(id);
-        if (res == null) { Console.WriteLine("Ressource non trouvée."); Pause(); return; }
+        if (res == null)
+        {
+            Console.WriteLine("Ressource non trouvée.");
+            Pause();
+            return;
+        }
+
 
         Console.Write("Nom du client : ");
         string nom = Console.ReadLine();
+
         Console.Write("Email du client : ");
         string email = Console.ReadLine();
+
         Console.Write("Date (JJ/MM/AAAA) : ");
         DateTime.TryParse(Console.ReadLine(), out DateTime date);
 
+        // Création du client avec le constructeur correct (2 arguments)
+        var client = new Client(nom!, email!);
+
+        // Création de la réservation
         var reservation = new Reservation(
             revSvc.ListerReservations().Count + 1,
             res,
-            new Client(new Random().Next(1, 1000), nom, email),
+            client,
             date,
             Reservation.StatutReservation.Confirmee
         );
 
-        if (revSvc.CreerReservation(reservation))
-            Console.WriteLine("\nSuccès : Réservation confirmée !");
-        else
-            Console.WriteLine("\nErreur : La ressource est déjà prise à cette date.");
+        // Ajout de la réservation (void, pas de if)
+        revSvc.CreerReservation(reservation);
 
+        Console.WriteLine("\nSuccès : Réservation confirmée !");
         Pause();
     }
 
@@ -105,8 +127,17 @@ class Program
     {
         Console.Clear();
         var list = service.ListerReservations();
-        if (!list.Any()) Console.WriteLine("Aucune réservation.");
-        foreach (var r in list) AfficherDesignRecapitulatif(r);
+        if (!list.Any())
+        {
+            Console.WriteLine("Aucune réservation.");
+            Pause();
+            return;
+        }
+
+        foreach (var r in list)
+        {
+            AfficherDesignRecapitulatif(r);
+        }
         Pause();
     }
 
@@ -127,5 +158,9 @@ class Program
         Console.WriteLine("\n══════════════════════════════════════════════════════════\n");
     }
 
-    static void Pause() { Console.WriteLine("\nAppuyez sur une touche..."); Console.ReadKey(); }
+    static void Pause()
+    {
+        Console.WriteLine("\nAppuyez sur une touche...");
+        Console.ReadKey();
+    }
 }

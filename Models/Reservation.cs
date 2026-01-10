@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using MiniPojetCSarp_SMART_Coding.Models;
 
 
 
 /// <summary>
 /// Gère les informations liées à une réservation spécifique.
 /// </summary>
-namespace MiniPojetCSarp_SMART_Coding.Models
+namespace MiniPojetCSarp_SMART_Coding.Services
 {
     public class Reservation
     {

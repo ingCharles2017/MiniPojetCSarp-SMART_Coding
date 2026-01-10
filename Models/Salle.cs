@@ -9,7 +9,7 @@ namespace MiniPojetCSarp_SMART_Coding.Models
 
         public int Capacite { get; set; }
 
-        public Salle(int id, string nom, string responsable, string contact, int capacite)
+        public Salle(int id, string nom, Responsable responsable, string contact, int capacite)
             : base(id, nom, responsable, contact)
         {
 
