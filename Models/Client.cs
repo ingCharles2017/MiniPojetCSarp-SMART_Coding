@@ -10,6 +10,7 @@ namespace MiniPojetCSarp_SMART_Coding.Models
 {
     public class Client
     {
+        private static int _nextId = 1; // compteur auto pour ID
         public int Id { get; set; }
         public string Nom { get; set; }
         public string Email { get; set; }

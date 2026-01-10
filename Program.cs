@@ -10,7 +10,6 @@ class Program
 
     static void Main(string[] args)
     {
-        // Initialisation des données
         InitialiserDonnees(_resourceService);
 
         bool quitter = false;
@@ -23,36 +22,26 @@ class Program
 
             switch (choix)
             {
-                case "1":
-                    ListerRessources(_resourceService);
-                    break;
-                case "2":
-                    CreerReservationInteractive(_resourceService, _reservationService);
-                    break;
-                case "3":
-                    ListerReservationsInteractive(_reservationService);
-                    break;
-                case "0":
-                    quitter = true;
-                    break;
+                case "1": ListerRessources(_resourceService); break;
+                case "2": CreerReservationInteractive(_resourceService, _reservationService); break;
+                case "3": ListerReservationsInteractive(_reservationService); break;
+                case "0": quitter = true; break;
                 default:
-                    Console.WriteLine("Choix invalide.");
-                    Pause();
-                    break;
+                    Console.WriteLine("Choix invalide."); Pause(); break;
             }
         }
     }
 
     static void AfficherMenuPrincipal()
     {
-        Console.WriteLine("╔══════════════════════════════════════════════════╗");
-        Console.WriteLine("║        SYSTÈME DE GESTION DES RÉSERVATIONS       ║");
-        Console.WriteLine("╠══════════════════════════════════════════════════╣");
-        Console.WriteLine("║ 1 - Lister les ressources                        ║");
-        Console.WriteLine("║ 2 - Créer une réservation                        ║");
-        Console.WriteLine("║ 3 - Lister les réservations (Récapitulatif)      ║");
-        Console.WriteLine("║ 0 - Quitter                                      ║");
-        Console.WriteLine("╚══════════════════════════════════════════════════╝");
+        Console.WriteLine("╔════════════════════════════════════════╗");
+        Console.WriteLine("║     SYSTÈME DE GESTION DES RÉSERVATIONS ║");
+        Console.WriteLine("╠════════════════════════════════════════╣");
+        Console.WriteLine("║ 1 - Lister les ressources              ║");
+        Console.WriteLine("║ 2 - Créer une réservation              ║");
+        Console.WriteLine("║ 3 - Lister les réservations            ║");
+        Console.WriteLine("║ 0 - Quitter                            ║");
+        Console.WriteLine("╚════════════════════════════════════════╝");
     }
 
     static void InitialiserDonnees(RessourceService service)
@@ -61,9 +50,9 @@ class Program
         Responsable resp1 = new Responsable(1, "Marie Laurent", "marie.laurent@entreprise.com");
         Responsable resp2 = new Responsable(2, "Paul Martin", "paul.martin@entreprise.com");
 
-        // Ajout des ressources
-        service.AjouterRessource(new Salle(1, "Salle de réunion A", resp1, "Poste 402", 20));
-        service.AjouterRessource(new Chambre(2, "Chambre visiteurs", resp2, "Réception", 101, 2));
+        // Ajout de ressources
+        service.AjouterRessource(new Salle(1, "Salle A", resp1, "Poste 402", 20));
+        service.AjouterRessource(new Chambre(2, "Chambre visiteurs", null, "Réception", 101, 2)); // responsable non attribué
         service.AjouterRessource(new Equipement(3, "Projecteur Epson", resp1, "Dépôt B", "Vidéo"));
     }
 
@@ -73,7 +62,8 @@ class Program
         Console.WriteLine("========= LISTE DES RESSOURCES =========");
         foreach (var r in service.ListerRessources())
         {
-            Console.WriteLine($"ID: {r.Id} | {r.GetTypeRessource().PadRight(10)} | Nom: {r.Nom}");
+            var resp = r.Responsable;
+            Console.WriteLine($"ID: {r.Id} | {r.GetTypeRessource().PadRight(10)} | Nom: {r.Nom} | Resp: {(resp != null ? resp.Nom : "Non attribué")}");
         }
         Pause();
     }
@@ -82,43 +72,30 @@ class Program
     {
         Console.Clear();
         Console.WriteLine("========= CRÉATION D'UNE RÉSERVATION =========");
-
         Console.Write("ID de la ressource : ");
         if (!int.TryParse(Console.ReadLine(), out int id)) return;
 
         var res = resSvc.ObtenirParId(id);
-        if (res == null)
+        if (res == null) { Console.WriteLine("Ressource non trouvée."); Pause(); return; }
+
+        Console.Write("Nom du client : ");
+        string nom = Console.ReadLine()!;
+        Console.Write("Email du client : ");
+        string email = Console.ReadLine()!;
+        Console.Write("Date (JJ/MM/AAAA) : ");
+        DateTime.TryParse(Console.ReadLine(), out DateTime date);
+
+        if (!revSvc.EstDisponible(res, date))
         {
-            Console.WriteLine("Ressource non trouvée.");
+            Console.WriteLine("La ressource est déjà réservée à cette date.");
             Pause();
             return;
         }
 
+        var client = new Client(nom, email);
+        var reservation = new Reservation(revSvc.ListerReservations().Count + 1, res, client, date, Reservation.StatutReservation.Confirmee);
 
-        Console.Write("Nom du client : ");
-        string nom = Console.ReadLine();
-
-        Console.Write("Email du client : ");
-        string email = Console.ReadLine();
-
-        Console.Write("Date (JJ/MM/AAAA) : ");
-        DateTime.TryParse(Console.ReadLine(), out DateTime date);
-
-        // Création du client avec le constructeur correct (2 arguments)
-        var client = new Client(nom!, email!);
-
-        // Création de la réservation
-        var reservation = new Reservation(
-            revSvc.ListerReservations().Count + 1,
-            res,
-            client,
-            date,
-            Reservation.StatutReservation.Confirmee
-        );
-
-        // Ajout de la réservation (void, pas de if)
         revSvc.CreerReservation(reservation);
-
         Console.WriteLine("\nSuccès : Réservation confirmée !");
         Pause();
     }
@@ -127,17 +104,8 @@ class Program
     {
         Console.Clear();
         var list = service.ListerReservations();
-        if (!list.Any())
-        {
-            Console.WriteLine("Aucune réservation.");
-            Pause();
-            return;
-        }
-
-        foreach (var r in list)
-        {
-            AfficherDesignRecapitulatif(r);
-        }
+        if (!list.Any()) { Console.WriteLine("Aucune réservation."); Pause(); return; }
+        foreach (var r in list) AfficherDesignRecapitulatif(r);
         Pause();
     }
 
@@ -146,16 +114,23 @@ class Program
         Console.WriteLine("══════════════════════════════════════════════════════════");
         Console.WriteLine("                RÉCAPITULATIF DE RÉSERVATION              ");
         Console.WriteLine("══════════════════════════════════════════════════════════");
+
+        var resp = r.Ressource.Responsable;
+
         Console.WriteLine("\nRessource");
         Console.WriteLine($"  Type      : {r.Ressource.GetTypeRessource()}");
-        Console.WriteLine($"  Nom       : {r.Ressource.Nom} | Resp : {r.Ressource.Responsable.Nom}");
-        Console.WriteLine($"  Contact   : {r.Ressource.Responsable.Email}");
+        Console.WriteLine($"  Nom       : {r.Ressource.Nom}");
+        Console.WriteLine($"  Responsable : {(resp != null ? resp.Nom : "Non attribué")}");
+        Console.WriteLine($"  Contact   : {(resp != null ? resp.Email : "N/A")}");
+
         Console.WriteLine("\nClient");
         Console.WriteLine($"  Nom       : {r.ClientInterne.Nom}");
         Console.WriteLine($"  Email     : {r.ClientInterne.Email}");
+
         Console.WriteLine("\nRéservation");
-        Console.WriteLine($"  Date      : {r.DateReservation:dd MMMM yyyy} | Statut : {r.Statut}");
-        Console.WriteLine("\n══════════════════════════════════════════════════════════\n");
+        Console.WriteLine($"  Date      : {r.DateReservation:dd MMMM yyyy}");
+        Console.WriteLine($"  Statut    : {r.Statut}");
+        Console.WriteLine("══════════════════════════════════════════════════════════\n");
     }
 
     static void Pause()
