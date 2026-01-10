@@ -1,26 +1,6 @@
-<<<<<<< HEAD
-using System.Collections.Generic;
-using System.Linq;
-using MiniPojetCSarp_SMART_Coding.Models;
-using Ressource.Models;
-
-namespace RessourceService
-{
-   public class RessourceService
-    {
-        private List<Ressource> ressources = new List<Ressource>();
-
-        public void AjouterRessource( Ressource ressource)
-        {
-            return ressource.Add(ressource);
-        }
-
-        public Ressource TrouverParId (int Id)
-        {
-            return ressources.FirstOrDefault(r => r.Id == id);
-=======
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using MiniPojetCSarp_SMART_Coding.Models;
 
 namespace MiniPojetCSarp_SMART_Coding.Services
@@ -33,12 +13,15 @@ namespace MiniPojetCSarp_SMART_Coding.Services
         {
             ressources = new List<Ressource>();
         }
-public void AjouterRessource(Ressource ressource)
+
+        // Ajouter une ressource
+        public void AjouterRessource(Ressource ressource)
         {
             ressources.Add(ressource);
             Console.WriteLine("Ressource ajoutée avec succès.");
         }
 
+        // Afficher toutes les ressources
         public void AfficherRessources()
         {
             if (ressources.Count == 0)
@@ -46,6 +29,7 @@ public void AjouterRessource(Ressource ressource)
                 Console.WriteLine("Aucune ressource disponible.");
                 return;
             }
+
             foreach (Ressource r in ressources)
             {
                 Console.WriteLine(
@@ -56,26 +40,16 @@ public void AjouterRessource(Ressource ressource)
             }
         }
 
+        // Obtenir une ressource par ID
         public Ressource ObtenirParId(int id)
         {
-            foreach (Ressource r in ressources)
-            {
-                if (r.Id == id)
-                {
-                    return r;
-                }
-            }
-            return null;
->>>>>>> 52cb777b38368aa3fec9567d5e7448d68038284c
+            return ressources.FirstOrDefault(r => r.Id == id);
         }
 
+        // Retourner la liste des ressources
         public List<Ressource> ListerRessources()
         {
             return ressources;
         }
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 52cb777b38368aa3fec9567d5e7448d68038284c
 }
