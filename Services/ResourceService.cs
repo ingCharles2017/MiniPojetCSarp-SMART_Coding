@@ -1,24 +1,3 @@
-<<<<<<< HEAD
-using System.Collections.Generic;
-using System.Linq;
-using MiniPojetCSarp_SMART_Coding.Models;
-using Ressource.Models;
-
-namespace RessourceService
-{
-   public class RessourceService
-    {
-        private List<Ressource> ressources = new List<Ressource>();
-
-        public void AjouterRessource( Ressource ressource)
-        {
-            return ressource.Add(ressource);
-        }
-
-        public Ressource TrouverParId (int Id)
-        {
-            return ressources.FirstOrDefault(r => r.Id == id);
-=======
 using System;
 using System.Collections.Generic;
 using MiniPojetCSarp_SMART_Coding.Models;
@@ -66,7 +45,6 @@ public void AjouterRessource(Ressource ressource)
                 }
             }
             return null;
->>>>>>> 52cb777b38368aa3fec9567d5e7448d68038284c
         }
 
         public List<Ressource> ListerRessources()
@@ -74,8 +52,4 @@ public void AjouterRessource(Ressource ressource)
             return ressources;
         }
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 52cb777b38368aa3fec9567d5e7448d68038284c
 }
