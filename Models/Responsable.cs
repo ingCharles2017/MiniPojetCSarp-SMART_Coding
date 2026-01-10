@@ -22,3 +22,4 @@ namespace MiniPojetCSarp_SMART_Coding.Models
             Email = email;
         }
     }
+}

@@ -129,4 +129,3 @@ class Program
 
     static void Pause() { Console.WriteLine("\nAppuyez sur une touche..."); Console.ReadKey(); }
 }
-}

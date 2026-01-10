@@ -1,11 +1,7 @@
 using System;
 using System.Collections.Generic;
-<<<<<<< HEAD
 using System.Linq;
 using MiniPojetCSarp_SMART_Coding.Models;
-
-namespace RessourceService
-
 using MiniPojetCSarp_SMART_Coding.Models;
 
 namespace MiniPojetCSarp_SMART_Coding.Services
@@ -72,5 +68,5 @@ namespace MiniPojetCSarp_SMART_Coding.Services
 
 }
 
-}
+
 

@@ -9,7 +9,7 @@ public abstract class Ressource
 {
     public int Id { get; }
     public string Nom { get; set; }
-    public Responsable Responsable { get; set; }
+    public Responsable responsable { get; set; }
     public string Contact { get; set; }
 
     protected Ressource(int id, string nom, Responsable responsable, string contact)

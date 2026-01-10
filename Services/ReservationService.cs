@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
-<<<<<<< HEAD
+
 using MiniPojetCSarp_SMART_Coding.Models;
 
-=======
 using GestionReservations.Models;
->>>>>>> d8c38fb67960cc8509f0f6bbbb90e466a60d9186
+
 
 namespace GestionReservations.Services
 {
