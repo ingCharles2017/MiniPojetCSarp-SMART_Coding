@@ -10,10 +10,10 @@ namespace MiniPojetCSarp_SMART_Coding.Models
         public string Categorie { get; set; }
         public bool EstDisponible { get; set; }
 
-        public Equipement(int id, string nom, Responsable responsable, string contact, string categorie ) : base(id, nom, responsable, contact) 
+        public Equipement(int id, string nom, Responsable responsable, /*string contact,*/ string categorie,bool EstDispo ) : base(id,nom,responsable) 
         {
             Categorie = categorie;
-            EstDisponible = true;
+            EstDisponible = EstDispo;
 
         }
         public override string GetTypeRessource()

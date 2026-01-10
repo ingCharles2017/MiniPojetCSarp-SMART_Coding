@@ -11,11 +11,12 @@ namespace MiniPojetCSarp_SMART_Coding.Models
         public int NombreDeLists { get; set; }
    
 
-        public Chambre(int id, string nom, Responsable responsable, string contact, int numero, int nombreDeLists) : base(id, nom, responsable, contact)
+        public Chambre(int id, string nom, Responsable responsable,/* string contact,*/ int numero, int nombreDeLit) :
+            base(id, nom, responsable)
         {
 
                 Numero = numero;
-                NombreDeLists = nombreDeLits;
+                NombreDeLists = nombreDeLit;
             
         }
         public override string GetTypeRessource()

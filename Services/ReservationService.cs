@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
-using Reservations.Models;
+using MiniPojetCSarp_SMART_Coding.Models;
 
-namespace GestionReservations.Services
+namespace MiniPojetCSarp_SMART_Coding.Services
 {
     public class ReservationService
     {
-        private List<Reservation> reservations = new List<Reservation>();
+        public static List<Reservation> reservations = new List<Reservation>();
 
-        public void CreerReservation(Reservation reservation)
+        public  static void CreerReservation(Reservation reservation)
         {
             reservations.Add(reservation);
         }
@@ -18,7 +18,7 @@ namespace GestionReservations.Services
             return reservations.FirstOrDefault(r => r.Id == id);
         }
 
-        public List<Reservation> ListerReservations()
+        public static List<Reservation> ListerReservations()
         {
             return reservations;
         }

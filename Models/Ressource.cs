@@ -11,12 +11,19 @@ namespace MiniPojetCSarp_SMART_Coding.Models
         public Responsable Responsable { get; set; }
         public string Contact { get; set; }
 
+        protected Ressource(int id, string nom, Responsable responsable/*, string contact*/)
+        {
+            Id = id;
+            Nom = nom;
+            Responsable = responsable;
+          //  Contact = contact;
+        }
         protected Ressource(int id, string nom, Responsable responsable, string contact)
         {
             Id = id;
             Nom = nom;
             Responsable = responsable;
-            Contact = contact;
+            //  Contact = contact;
         }
 
         public abstract string GetTypeRessource();
