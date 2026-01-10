@@ -5,11 +5,11 @@ using System.Linq;
 using MiniPojetCSarp_SMART_Coding.Models;
 
 namespace RessourceService
-=======
+
 using MiniPojetCSarp_SMART_Coding.Models;
 
 namespace MiniPojetCSarp_SMART_Coding.Services
->>>>>>> d8c38fb67960cc8509f0f6bbbb90e466a60d9186
+
 {
     public class RessourceService
     {
@@ -49,9 +49,9 @@ namespace MiniPojetCSarp_SMART_Coding.Services
         // Obtenir une ressource par ID
         public Ressource ObtenirParId(int id)
         {
-<<<<<<< HEAD
+
             return ressources.FirstOrDefault(r => r.Id == id);
-=======
+
             foreach (Ressource r in ressources)
             {
                 if (r.Id == id)
@@ -60,7 +60,7 @@ namespace MiniPojetCSarp_SMART_Coding.Services
                 }
             }
             return null;
->>>>>>> d8c38fb67960cc8509f0f6bbbb90e466a60d9186
+
         }
 
         // Retourner la liste des ressources
@@ -69,8 +69,8 @@ namespace MiniPojetCSarp_SMART_Coding.Services
             return ressources;
         }
     }
-<<<<<<< HEAD
+
 }
-=======
+
 }
->>>>>>> d8c38fb67960cc8509f0f6bbbb90e466a60d9186
+
