@@ -12,14 +12,14 @@ namespace MiniPojetCSarp_SMART_Coding.Models
     {
         public int Id { get; }
         public string Nom { get; set; }
-        public Responsable? Responsable { get; set; }
-        public string Contact { get; set; }
+        public Responsable Responsable { get; set; }
+        public string Contact { get; set; } = "N/A"; // valeur par défaut
 
-        protected Ressource(int id, string nom, Responsable responsable, string contact)
+        protected Ressource(int id, string nom, Responsable responsable, string contact = "N/A")
         {
             Id = id;
             Nom = nom;
-            Responsable = responsable;
+            Responsable = responsable ?? new Responsable(); // jamais null
             Contact = contact;
         }
 

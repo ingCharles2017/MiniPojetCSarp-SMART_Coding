@@ -14,12 +14,5 @@ namespace MiniPojetCSarp_SMART_Coding.Models
         public string Email { get; set; } 
 
         public Responsable() { }
-
-        public Responsable(int id, string nom, string email)
-        {
-            Id = id;
-            Nom = nom;
-            Email = email;
-        }
     }
 }
