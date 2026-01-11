@@ -52,11 +52,11 @@ class Program
     static void AfficherMenuPrincipal()
     {
         Console.WriteLine("╔════════════════════════════════════════════════╗");
-        Console.WriteLine("║     SYSTÈME DE GESTION DES RÉSERVATIONS       ║");
+        Console.WriteLine("║     SYSTÈME DE GESTION DES RÉSERVATIONS        ║");
         Console.WriteLine("╠════════════════════════════════════════════════╣");
-        Console.WriteLine("║ 1 - Gérer les ressources                        ║");
-        Console.WriteLine("║ 2 - Gérer les réservations                      ║");
-        Console.WriteLine("║ 3 - Lister les réservations                     ║");
+        Console.WriteLine("║ 1 - Gérer les ressources                       ║");
+        Console.WriteLine("║ 2 - Gérer les réservations                     ║");
+        Console.WriteLine("║ 3 - Lister les réservations                    ║");
         Console.WriteLine("║ 0 - Quitter                                    ║");
         Console.WriteLine("╚════════════════════════════════════════════════╝");
     }
